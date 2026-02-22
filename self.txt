@@ -1,4 +1,4 @@
-local self = "?"\n
+local self = [[?]]\n
 \n
 local put = io.write\n
 local real = ""\n
