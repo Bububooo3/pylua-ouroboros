@@ -1,4 +1,4 @@
-local self = \[\[?\]\]\n
+self = local self = \[\[?\]\]\n
 \n
 local put = io.write\n
 local real = ""\n
@@ -30,7 +30,7 @@ for section in self:gmatch("([^\124]*)") do\n
   end\n
 end\n
 \n
-print(real)\n|self = "?"\n
+print(real)\n|self = \"\"\"?\"\"\"\n
 \n
 for char in self.split(chr(124))[1]:\n
     if ord(char) == 63:\n
