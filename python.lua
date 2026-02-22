@@ -1,10 +1,10 @@
-self = """self = local self = \[\[?\]\]\n
+local self = [[self = local self = \[\[?\]\]\n
 \n
 local put = io.write\n
 local real = ""\n
 local cango = 0\n
 \n
-for section in self:gmatch("([^\124]*)") do\n
+for section in self:gmatch("([^\\124]*)") do\n
   if cango < 2 then cango = cango + 1\n
   else\n
       for char in section:gmatch(".") do\n
@@ -41,21 +41,41 @@ for char in self.split(chr(124))[1]:\n
                 print("\\\"", end='')\n
             elif c == '\\':\n
                 print("\\\\", end='')\n
+            elif c == '\\124':\n
+                print("\\124", end='')\n
             else:\n
                 print(f"{c}", end='')\n
     else:\n
-        print(char, end='')\n"""
+        print(char, end='')\n]]
 
-for char in self.split(chr(124))[0]:
-    if ord(char) == 63:
-        for c in self:
-            if c == '\n':
-                print("\\n", end='')
-            elif c == '"':
-                print("\\\"", end='')
-            elif c == '\\':
-                print("\\\\", end='')
-            else:
-                print(f"{c}", end='')
-    else:
-        print(char, end='')
+local put = io.write
+local real = ""
+local cango = 0
+
+for section in self:gmatch("([^\124]*)") do
+  if cango <1 then cango = cango + 1
+  else
+      for char in section:gmatch(".") do
+        local b = char:byte();
+  
+        if b == 63 then
+          for d in self:gmatch(".") do
+            local c = d:byte();
+            if c == "\n" then
+              real = real..("\\n")
+            elseif c == '"' then
+              real = real..('\\\"')
+            elseif c == "\\" then
+              real = real..('\\\\')
+            else
+              real = real..(d)
+            end
+          end
+      else
+        real = real..(char)
+      end
+    end
+  end
+end
+
+print(real)
