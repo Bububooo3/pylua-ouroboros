@@ -4,7 +4,7 @@ local put = io.write\n
 local real = ""\n
 local cango = 0\n
 \n
-for section in self:gmatch("([^|]*)") do\n
+for section in self:gmatch("([^124]*)") do\n
   if cango == 0 then cango = 1\n
   else\n
       for char in section:gmatch(".") do\n
@@ -30,7 +30,7 @@ for section in self:gmatch("([^|]*)") do\n
   end\n
 end\n|self = "?"\n
 \n
-for char in self.split('|')[1]:\n
+for char in self.split(chr(124))[1]:\n
     if ord(char) == 63:\n
         for c in self:\n
             if c == '\n':\n
