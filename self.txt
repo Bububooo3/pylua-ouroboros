@@ -1,0 +1,45 @@
+local self = "?"\n
+\n
+local put = io.write\n
+local real = ""\n
+local cango = 0\n
+\n
+for section in self:gmatch("([^|]*)") do\n
+  if cango == 0 then cango = 1\n
+  else\n
+      for char in section:gmatch(".") do\n
+        local b = char:byte();\n
+  \n
+        if b == 63 then\n
+          for d in self:gmatch(".") do\n
+            local c = d:byte();\n
+            if c == "\n" then\n
+              put("\\n")\n
+            elseif c == '"' then\n
+              put('\\\"')\n
+            elseif c == "\\" then\n
+              put('\\\\')\n
+            else\n
+              put(d)\n
+            end\n
+        end\n
+      else\n
+        put(char)\n
+      end\n
+    end\n
+  end\n
+end\n|self = "?"\n
+\n
+for char in self.split('|')[1]:\n
+    if ord(char) == 63:\n
+        for c in self:\n
+            if c == '\n':\n
+                print("\\n", end='')\n
+            elif c == '"':\n
+                print("\\\"", end='')\n
+            elif c == '\\':\n
+                print("\\\\", end='')\n
+            else:\n
+                print(f"{c}", end='')\n
+    else:\n
+        print(char, end='')\n
