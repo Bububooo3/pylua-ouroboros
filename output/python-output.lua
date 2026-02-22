@@ -1,6 +1,4 @@
-/home/repl428/main.py:1: SyntaxWarning: invalid escape sequence '\['
-  self = """self = local self = \[\[?\]\]\n
-self = local self = \[\[self = local self = \\[\\[?\\]\\]\n\n\n\nlocal put = io.write\n\nlocal real = \"\"\n\nlocal cango = 0\n\n\n\nfor section in self:gmatch(\"([^T]*)\") do\n\n  if cango < 2 then cango = cango + 1\n\n  else\n\n      for char in section:gmatch(\".\") do\n\n        local b = char:byte();\n\n  \n\n        if b == 63 then\n\n          for d in self:gmatch(\".\") do\n\n            local c = d:byte();\n\n            if c == \"\n\" then\n\n              real = real..(\"\\n\")\n\n            elseif c == '\"' then\n\n              real = real..('\\\"')\n\n            elseif c == \"\\\" then\n\n              real = real..('\\\\')\n\n            else\n\n              real = real..(d)\n\n            end\n\n        end\n\n      else\n\n        real = real..(char)\n\n      end\n\n    end\n\n  end\n\nend\n\n\n\nprint(real)\n|self = \"\"\"?\"\"\"\n\n\n\nfor char in self.split(chr(124))[1]:\n\n    if ord(char) == 63:\n\n        for c in self:\n\n            if c == '\n':\n\n                print(\"\\n\", end='')\n\n            elif c == '\"':\n\n                print(\"\\\"\", end='')\n\n            elif c == '\\':\n\n                print(\"\\\\\", end='')\n\n            else:\n\n                print(f\"{c}\", end='')\n\n    else:\n\n        print(char, end='')\n\]\]
+local self = \[\[\[local self = \[\[\[?]]\n\n\n\nlocal put = io.write\n\nlocal real = \"\"\n\nlocal cango = 0\n\nlocal i = 0\n\n\n\nfor section in self:gmatch(\"(\[^\\124]*)\") do\n\n  if cango <1 then cango = cango + 1\n\n  else\n\n      for char in section:gmatch(\".\") do\n\n        i = i + 1\n\n        local b = char:byte();\n\n  \n\n        if b == 63 then\n\n          for d in self:gmatch(\".\") do\n\n            local c = d:byte();\n\n            if c == \"\\n\" then\n\n              real = real..(\"\\n\")\n\n            elseif c == '\"' then\n\n              real = real..('\\\"')\n\n            elseif c == \"\\\" then\n\n              real = real..('\\\\')\n\n            else\n\n              real = real..(d)\n\n            end\n\n          end\n\n      else\n\n        if (char ~= \"\\\") and (section:sub(i-1,i-1)~=\"\\\") or (char == \"\"\") then\n\n          real = real..(char)\n\n        end\n\n      end\n\n    end\n\n  end\n\nend\n\n\n\nprint(real)\n|self = \"\"\"?\"\"\"\n\nfor char in self.split(chr(124))\[0]:\n    if ord(char) == 63:\n        for c in self:\n            if c == '\n':\n                print(\"\\n\", end='')\n            elif c == '\"':\n                print(\"\\\"\", end='')\n            elif c == '\\':\n                print(\"\\\\\", end='')\n            elif c == '\\124':\n                print(\"\\124\", end='')\n            elif c == '\[':\n                print('\\\[', end='')\n            else:\n                print(f\"{c}\", end='')\n    else:\n        if char == '\[': char = '\\\['\n        print(char, end='')]]
 
 
 
@@ -10,15 +8,19 @@ local real = ""
 
 local cango = 0
 
+local i = 0
 
 
-for section in self:gmatch("([^T]*)") do
 
-  if cango < 2 then cango = cango + 1
+for section in self:gmatch("(\[^\124]*)") do
+
+  if cango <1 then cango = cango + 1
 
   else
 
       for char in section:gmatch(".") do
+
+        i = i + 1
 
         local b = char:byte();
 
@@ -30,8 +32,7 @@ for section in self:gmatch("([^T]*)") do
 
             local c = d:byte();
 
-            if c == "
-" then
+            if c == "\n" then
 
               real = real..("\n")
 
@@ -49,11 +50,15 @@ for section in self:gmatch("([^T]*)") do
 
             end
 
-        end
+          end
 
       else
 
-        real = real..(char)
+        if (char ~= "\") and (section:sub(i-1,i-1)~="\") or (char == """) then
+
+          real = real..(char)
+
+        end
 
       end
 
