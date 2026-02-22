@@ -32,7 +32,7 @@ end\n
 \n
 print(real)\n|self = "?"\n
 \n
-for char in self.split('|')[1]:\n
+for char in self.split(chr(124))[1]:\n
     if ord(char) == 63:\n
         for c in self:\n
             if c == '\n':\n
@@ -51,12 +51,14 @@ local real = ""
 local cango = 0
 
 for section in self:gmatch("([^\124]*)") do
-  if cango < 2 then cango = cango + 1
+  if cango <1 then cango = cango + 1
   else
       for char in section:gmatch(".") do
         local b = char:byte();
   
         if b == 63 then
+          for subsect in self:gmatch("([^\124]*)") do
+            
           for d in self:gmatch(".") do
             local c = d:byte();
             if c == "\n" then
