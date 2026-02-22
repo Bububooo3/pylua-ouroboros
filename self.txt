@@ -1,10 +1,10 @@
-local self = [[?]]\n
+local self = \[\[?\]\]\n
 \n
 local put = io.write\n
 local real = ""\n
 local cango = 0\n
 \n
-for section in self:gmatch("([^124]*)") do\n
+for section in self:gmatch("([^\124]*)") do\n
   if cango < 2 then cango = cango + 1\n
   else\n
       for char in section:gmatch(".") do\n
