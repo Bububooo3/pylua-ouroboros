@@ -32,7 +32,7 @@ end\n
 \n
 print(real)\n|self = "?"\n
 \n
-for char in self.split('|')[1]:\n
+for char in self.split(chr(124))[1]:\n
     if ord(char) == 63:\n
         for c in self:\n
             if c == '\n':\n
